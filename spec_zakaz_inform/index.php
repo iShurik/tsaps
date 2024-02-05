@@ -28,7 +28,7 @@ if ($data['key']=='Xk4B8wT6Zr') {
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
-			'text' => $data['message'].' id='.$chatId,
+			'text' => $data['message'],
 			'parse_mode' => 'HTML'
 		)
 	);  
