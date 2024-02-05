@@ -9,8 +9,8 @@ $text = '<b>Появился новый Заказ.</b>
 Более подробная информация по ссылке:
 https://tsaps.ru/ts/BVJGqiccM4Vf';
 
-$url = 'http://2205243-cu89621.twc1.net/tg_bots/spec_zakaz_inform/index.php';
-$data = ['message' => $text];
+$url = 'http://gpt.procpb.ru/tsaps/spec_zakaz_inform/index.php';
+$data = ['message' => $text, 'key' => 'Xk4B8wT6Zr'];
 $jsonData = json_encode($data);
 $headers = ['Content-Type: application/json'];
 

@@ -23,15 +23,16 @@ function sendTelegram($method, $response)
  
 	return $res;
 }
-
-sendTelegram(
-    'sendMessage', 
-    array(
-        'chat_id' => $chatId,
-        'text' => $data['message'],
-        'parse_mode' => 'HTML'
-    )
-);  
+if ($data['key']=='Xk4B8wT6Zr') {
+	sendTelegram(
+		'sendMessage', 
+		array(
+			'chat_id' => $chatId,
+			'text' => $data['message'],
+			'parse_mode' => 'HTML'
+		)
+	);  
+}
 
 echo $update;
 ?>
