@@ -5,7 +5,7 @@ $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
 $chatId = '413750305';
-$message = $data['message'];
+//$message = $data['message'];
 
 $ch = curl_init();
 
@@ -33,5 +33,5 @@ function sendTelegram($method, $response)
 		)
 	);  
 
-echo $res;
+echo $res['result']['message_id'];
 ?>
