@@ -1,6 +1,6 @@
 <?php
 
-$dbhost='localhost';
+$dbhost='gpt-mysql:3306';
 $dbuser='gpt';
 $dbpass='Elj845KMAE5KwnR6MTH3';
 $dbname='spec_zakaz_inform';
