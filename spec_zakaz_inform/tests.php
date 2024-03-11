@@ -33,5 +33,5 @@ function sendTelegram($method, $response)
 		)
 	);  
 
-echo $res['result']['message_id'];
+echo json_decode($res['result']['message_id'],true);
 ?>
