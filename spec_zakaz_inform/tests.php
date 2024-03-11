@@ -40,6 +40,14 @@ function sendTelegram($method, $response)
 		)
 	);  
 
+    sendTelegram(
+		'deleteMessage', 
+		array(
+			'chat_id' => $chatId,
+			'message_id' => '38'
+		)
+	);  
+
 $res = json_decode($res,true);
 
 echo $res['result']['message_id'];
