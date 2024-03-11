@@ -44,5 +44,5 @@ $res = json_decode($res,true);
 
 echo $res['result']['message_id'];
 
-mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'"');
+mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `message`="text"');
 ?>
