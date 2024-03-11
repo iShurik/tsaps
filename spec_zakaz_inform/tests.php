@@ -1,5 +1,12 @@
 <?php
 
+$dbhost='localhost';
+$dbuser='gpt';
+$dbpass='Elj845KMAE5KwnR6MTH3';
+$dbname='spec_zakaz_inform';
+
+$con=mysqli_connect($dbhost,$dbuser,$dbpass, $dbname) or die(mysql_error());
+
 $tgbotKey = '6847960586:AAGfv7CpK7c86dI9EhlfbrmfW0DRR_Rv2lE';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
@@ -36,4 +43,6 @@ function sendTelegram($method, $response)
 $res = json_decode($res,true);
 
 echo $res['result']['message_id'];
+
+mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'"');
 ?>
