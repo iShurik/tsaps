@@ -43,11 +43,16 @@ if ($data['key']=='Xk4B8wT6Zr' && $data['action']==1) {
 			'parse_mode' => 'HTML'
 		)
 	);  
+	$res = json_decode($res,true);
 
+	echo $res['result']['message_id'];
+	
+	mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `type`="'.$data['type'].'", `obj_id`="'.$data['obj_id'].'"');
+	
 }
 
 if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
-	$res = mysqli_query('SELECT `message_id` FROM `notifications` WHERE `type`="'.$data['type'].'" & `obj_id`="'.$data['obj_id'].'"');
+	$res = mysqli_query($con,'SELECT `message_id` FROM `notifications` WHERE `type`="'.$data['type'].'" & `obj_id`="'.$data['obj_id'].'"');
 	$num = mysqli_num_rows($res);
 	if ($num>0) {
 		$arr = mysqli_fetch_assoc($res);
@@ -61,9 +66,4 @@ if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
 		}
 }
 
-$res = json_decode($res,true);
-
-echo $res['result']['message_id'];
-
-mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `type`="'.$data['type'].'", `obj_id`="'.$data['obj_id'].'"');
 ?>
