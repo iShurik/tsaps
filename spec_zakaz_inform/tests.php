@@ -11,6 +11,9 @@ $tgbotKey = '6847960586:AAGfv7CpK7c86dI9EhlfbrmfW0DRR_Rv2lE';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
+$data = array("key" => "Xk4B8wT6Zr", "action" => 1, "type" => 1, "obj_id" => rand(100,3000), "message" => "Новый Заказ");
+
+
 $chatId = '413750305';
 //$message = $data['message'];
 
@@ -52,5 +55,5 @@ $res = json_decode($res,true);
 
 echo $res['result']['message_id'];
 
-mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `message`="text"');
+mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `type`="'.$data['type'].'", `obj_id`="'.$data['obj_id'].'"');
 ?>
