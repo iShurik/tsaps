@@ -63,7 +63,10 @@ if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
 				'message_id' => $arr['message_id']
 			)
 		);  
-		}
+		echo 'done';
+	} else {
+		echo 'ne done';
+	}
 }
 
 ?>
