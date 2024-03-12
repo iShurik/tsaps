@@ -34,22 +34,32 @@ function sendTelegram($method, $response)
 	return $res;
 }
 
+if ($data['key']=='Xk4B8wT6Zr' && $data['action']==1) {
 	$res = sendTelegram(
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
-			'text' => 'hola',
+			'text' => 'hola '.$data['obj_id'],
 			'parse_mode' => 'HTML'
 		)
 	);  
 
-    sendTelegram(
-		'deleteMessage', 
-		array(
-			'chat_id' => $chatId,
-			'message_id' => '38'
-		)
-	);  
+}
+
+if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
+	$res = mysqli_query('SELECT `message_id` FROM `notifications` WHERE `type`="'.$data['type'].'" & `obj_id`="'.$data['obj_id'].'"');
+	$num = mysqli_num_rows($res);
+	if ($num>0) {
+		$arr = mysqli_fetch_assoc($res);
+		sendTelegram(
+			'deleteMessage', 
+			array(
+				'chat_id' => $chatId,
+				'message_id' => $arr['message_id'];
+			)
+		);  
+		}
+}
 
 $res = json_decode($res,true);
 
