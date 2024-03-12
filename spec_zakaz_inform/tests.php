@@ -55,7 +55,7 @@ if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
 			'deleteMessage', 
 			array(
 				'chat_id' => $chatId,
-				'message_id' => $arr['message_id'];
+				'message_id' => $arr['message_id']
 			)
 		);  
 		}
