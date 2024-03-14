@@ -28,7 +28,8 @@ function sendTelegram($method, $response)
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
-			'text' => $update,
+			'text' => 'test 
+'.$update,
 			'parse_mode' => 'HTML'
 		)
 	);  
