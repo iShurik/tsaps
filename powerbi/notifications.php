@@ -4,7 +4,7 @@ $tgbotKey = '7163787842:AAFYdx7bwjkSBXG3j_E_h3ygYTZXu4fKwOc';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
-$chatId = '413750305';
+$chatId = '-938085597';
 $message = $data['message'];
 
 $ch = curl_init();
@@ -24,15 +24,15 @@ function sendTelegram($method, $response)
 	return $res;
 }
 
-	sendTelegram(
-		'sendMessage', 
-		array(
-			'chat_id' => $chatId,
-			'text' => 'test 
+sendTelegram(
+    'sendMessage', 
+    array(
+        'chat_id' => $chatId,
+        'text' => 'test 
 '.$update,
-			'parse_mode' => 'HTML'
-		)
-	);  
+        'parse_mode' => 'HTML'
+    )
+);  
 
 echo $update;
 ?>
