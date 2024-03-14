@@ -24,7 +24,7 @@ function sendTelegram($method, $response)
 	return $res;
 }
 
-sendTelegram(
+/*sendTelegram(
     'sendMessage', 
     array(
         'chat_id' => $chatId,
@@ -32,7 +32,7 @@ sendTelegram(
 '.$update,
         'parse_mode' => 'HTML'
     )
-);  
+);  */
 
 echo $update;
 ?>
