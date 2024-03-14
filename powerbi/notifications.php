@@ -4,7 +4,7 @@ $tgbotKey = '7163787842:AAFYdx7bwjkSBXG3j_E_h3ygYTZXu4fKwOc';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
-$chatId = '-938085597';
+$chatId = '-1002063428978';
 $message = $data['message'];
 
 $ch = curl_init();
