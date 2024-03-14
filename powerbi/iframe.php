@@ -4,6 +4,6 @@ $data = file_get_contents('https://app.powerbi.com/view?r=eyJrIjoiOWM0NTYwNjgtMj
 
 $pos = strpos($data, 'navigation-wrapper');
 
-echo 'pos '.$pos;
+echo htmlspecialchars($data);
 
 ?>
