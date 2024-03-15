@@ -11,7 +11,7 @@ $tgbotKey = '6847960586:AAGfv7CpK7c86dI9EhlfbrmfW0DRR_Rv2lE';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
-//$data = array("key" => "Xk4B8wT6Zr", "action" => 2, "type" => 1, "obj_id" => 161, "message" => "Новый Заказ");
+$data = array("key" => "Xk4B8wT6Zr", "action" => 2, "type" => 1, "obj_id" => 161, "message" => "Новый Заказ", "link" => "https://b2b.spec.help/showcase?showcase_id=64");
 
 
 $chatId = '-1002034413312';
@@ -35,12 +35,22 @@ function sendTelegram($method, $response)
 }
 
 if ($data['key']=='Xk4B8wT6Zr' && $data['action']==1) {
+	$button = $data['type']==1 ? 'Перейти к заказу' : 'Перейти к задаче';
+	$keyboard = json_encode($keyboard = [
+		'inline_keyboard' => [
+			[
+				['text' => $button, 'url' => $data['link']]
+			]
+		],
+	]);
+
 	$res = sendTelegram(
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
 			'text' => $data['message'],
-			'parse_mode' => 'HTML'
+			'parse_mode' => 'HTML',
+			'reply_markup' => $keyboard
 		)
 	);  
 	$res = json_decode($res,true);
