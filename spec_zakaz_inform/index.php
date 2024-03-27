@@ -36,21 +36,13 @@ function sendTelegram($method, $response)
 
 if ($data['key']=='Xk4B8wT6Zr' && $data['action']==1) {
 	$button = $data['type']==1 ? 'Перейти к заказу' : 'Перейти к задаче';
-	$keyboard = json_encode($keyboard = [
-		'inline_keyboard' => [
-			[
-				['text' => $button, 'url' => $data['link']]
-			]
-		],
-	]);
 
 	$res = sendTelegram(
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
 			'text' => $data['message'],
-			'parse_mode' => 'HTML',
-			'reply_markup' => $keyboard
+			'parse_mode' => 'HTML'
 		)
 	);  
 	$res = json_decode($res,true);
