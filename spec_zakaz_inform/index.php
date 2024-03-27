@@ -1,11 +1,21 @@
 <?php
 
+$dbhost='gpt-mysql:3306';
+$dbuser='gpt';
+$dbpass='Elj845KMAE5KwnR6MTH3';
+$dbname='gpt';
+
+$con=mysqli_connect($dbhost,$dbuser,$dbpass, $dbname) or die(mysql_error());
+
 $tgbotKey = '6847960586:AAGfv7CpK7c86dI9EhlfbrmfW0DRR_Rv2lE';
 $update = file_get_contents('php://input');
 $data = json_decode($update, true);
 
-$chatId = '-1002037590521';
-$message = $data['message'];
+//$data = array("key" => "Xk4B8wT6Zr", "action" => 1, "type" => 1, "obj_id" => 161, "message" => "Новый Заказ", "link" => "https://b2b.spec.help/showcase?showcase_id=64");
+
+
+$chatId = '-1002133920269';
+//$message = $data['message'];
 
 $ch = curl_init();
 
@@ -24,16 +34,50 @@ function sendTelegram($method, $response)
 	return $res;
 }
 
-if ($data['key']=='Xk4B8wT6Zr') {
-	sendTelegram(
+if ($data['key']=='Xk4B8wT6Zr' && $data['action']==1) {
+	$button = $data['type']==1 ? 'Перейти к заказу' : 'Перейти к задаче';
+	$keyboard = json_encode($keyboard = [
+		'inline_keyboard' => [
+			[
+				['text' => $button, 'url' => $data['link']]
+			]
+		],
+	]);
+
+	$res = sendTelegram(
 		'sendMessage', 
 		array(
 			'chat_id' => $chatId,
 			'text' => $data['message'],
-			'parse_mode' => 'HTML'
+			'parse_mode' => 'HTML',
+			'reply_markup' => $keyboard
 		)
 	);  
+	$res = json_decode($res,true);
+
+	echo $res['result']['message_id'];
+	
+	mysqli_query($con,'INSERT INTO `notifications` SET `message_id`="'.$res['result']['message_id'].'", `type`="'.$data['type'].'", `obj_id`="'.$data['obj_id'].'"');
+	
 }
 
-echo $update;
+if ($data['key']=='Xk4B8wT6Zr' && $data['action']==2) {
+	$res = mysqli_query($con,'SELECT `id`, `message_id` FROM `notifications` WHERE `type`="'.$data['type'].'" AND `obj_id`="'.$data['obj_id'].'"');
+	$num = mysqli_num_rows($res);
+	if ($num>0) {
+		$arr = mysqli_fetch_assoc($res);
+		sendTelegram(
+			'deleteMessage', 
+			array(
+				'chat_id' => $chatId,
+				'message_id' => $arr['message_id']
+			)
+		);  
+		mysqli_query($con,'DELETE FROM `notifications` WHERE `id`="'.$arr['id'].'"');
+		echo 'done';
+	} else {
+		echo 'ne done';
+	}
+}
+
 ?>
